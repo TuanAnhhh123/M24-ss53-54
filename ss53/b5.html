@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Condition with Callback</title>
+    <script>
+        function checkCondition(condition, callback) {
+            setTimeout(() => {
+                callback(condition);
+            }, 1000);  
+        }
+
+        // Hàm callback ví dụ
+        function display(result) {
+            console.log(`Điều kiện trả về: ${result}`);
+            const messageElement = document.createElement('p');
+            messageElement.innerText = `Điều kiện trả về: ${result}`;
+            document.body.appendChild(messageElement);
+        }
+
+        window.onload = function() {
+
+            checkCondition(true, display);
+
+            checkCondition(false, display);
+        }
+    </script>
+</head>
+<body>
+    <h1>Check Condition with Callback Example</h1>
+</body>
+</html>

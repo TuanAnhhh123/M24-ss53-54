@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Element</title>
+</head>
+<body>
+    <h1>Find Element</h1>
+    <label for="searchValue">Enter a value to search:</label>
+    <input type="text" id="searchValue">
+    <button onclick="findAndDisplayElement([1, 2, 3, 4, 5])">Find Element</button>
+    <div id="result"></div>
+
+    <script>
+        function findElement(array, value) {
+            return new Promise((resolve, reject) => {
+                const index = array.indexOf(value);
+                if (index !== -1) {
+                    resolve(`Phần tử ${value} được tìm thấy ở vị trí thứ ${index}.`);
+                } else {
+                    reject(`Error: Không tìm thấy phần tử ${value}`);
+                }
+            });
+        }
+
+        async function findAndDisplayElement(array) {
+            const searchValue = parseInt(document.getElementById("searchValue").value);
+            try {
+                const message = await findElement(array, searchValue);
+                document.getElementById("result").innerText = message;
+            } catch (error) {
+                document.getElementById("result").innerText = error;
+            }
+        }
+    </script>
+</body>
+</html>

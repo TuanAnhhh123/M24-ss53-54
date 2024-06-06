@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom myFindIndex Function</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Custom myFindIndex Function in JavaScript</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Input</th>
+                <th>Output</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <pre>
+const numbers = [1, 2, 2, 3, 4, 5, 6];
+myFindIndex(numbers, 2, callback);
+                    </pre>
+                </td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>
+                    <pre>
+myFindIndex(numbers, 10, callback);
+                    </pre>
+                </td>
+                <td>-1</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <script>
+        function myFindIndex(arr, value, callback) {
+            for (let i = 0; i < arr.length; i++) {
+                if (callback(arr[i], value)) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        function callback(element, value) {
+            return element === value;
+        }
+
+        const numbers = [1, 2, 2, 3, 4, 5, 6];
+        console.log(myFindIndex(numbers, 2, callback)); 
+        console.log(myFindIndex(numbers, 10, callback)); 
+    </script>
+</body>
+</html>

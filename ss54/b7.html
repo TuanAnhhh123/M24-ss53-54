@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise Example</title>
+</head>
+<body>
+    <h1>Promise Example</h1>
+    <button onclick="executePromise()">Execute Promise</button>
+    
+    <script>
+        function executePromise() {
+            const myFirstPromise = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve("Success!");
+                }, 1000);
+            });
+
+            myFirstPromise.then((message) => {
+                document.getElementById("result").innerText = "Result! " + message;
+            });
+        }
+    </script>
+
+    <div id="result"></div>
+</body>
+</html>

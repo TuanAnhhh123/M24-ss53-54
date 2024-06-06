@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tính Tổng với Promise</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tính Tổng với Promise</h1>
+        <label for="numbers">Nhập vào các số nguyên (cách nhau bởi dấu phẩy):</label>
+        <input type="text" id="numbers" required>
+        <button onclick="handleSumWithPromise()">Tính Tổng</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+
+        function sumWithPromise(numbers) {
+            return new Promise((resolve, reject) => {
+                if (!Array.isArray(numbers)) {
+                    reject(new Error('Đầu vào phải là một mảng.'));
+                }
+                const sum = numbers.reduce((acc, curr) => {
+                    if (typeof curr !== 'number' || isNaN(curr)) {
+                        reject(new Error('Mảng phải chứa các số nguyên.'));
+                    }
+                    return acc + curr;
+                }, 0);
+                resolve(sum);
+            });
+        }
+
+
+        function handleSumWithPromise() {
+            const input = document.getElementById('numbers').value;
+            const numbers = input.split(',').map(num => parseInt(num.trim()));
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '';
+
+            sumWithPromise(numbers)
+                .then(sum => {
+                    console.log(`Tổng của mảng là: ${sum}`);
+                    resultDiv.innerHTML = `Tổng của mảng là: ${sum}`;
+                })
+                .catch(error => {
+                    console.error(error.message);
+                    resultDiv.innerHTML = `<span class="error">${error.message}</span>`;
+                });
+        }
+
+
+        function testSumWithPromise() {
+            const tests = [
+                { input: [1, 2, 3, 4, 5, 6, 7], expected: 28 },
+                { input: [1, 'a', 3], expected: 'Mảng phải chứa các số nguyên.' },
+                { input: 'not an array', expected: 'Đầu vào phải là một mảng.' },
+            ];
+
+            tests.forEach(test => {
+                sumWithPromise(test.input)
+                    .then(result => {
+                        console.log(`sumWithPromise(${test.input}) = ${result}; Expected = ${test.expected}`);
+                    })
+                    .catch(error => {
+                        console.log(`sumWithPromise(${test.input}) = ${error.message}; Expected = ${test.expected}`);
+                    });
+            });
+        }
+
+        testSumWithPromise();
+    </script>
+</body>
+</html>

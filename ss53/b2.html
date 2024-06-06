@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delayed Callback Example</title>
+    <script>
+        function delayedCallback(callback, delay) {
+            setTimeout(callback, delay);
+        }
+
+        function myCallback() {
+            console.log("Callback function is called after delay!");
+            document.getElementById("message").innerText = "Callback function is called after delay!";
+        }
+
+        window.onload = function() {
+            delayedCallback(myCallback, 2000);
+        }
+    </script>
+</head>
+<body>
+    <h1>Delayed Callback Example</h1>
+    <p id="message">Waiting for the callback...</p>
+</body>
+</html>

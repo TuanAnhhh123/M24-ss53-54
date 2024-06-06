@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom myFind Function</title>
+    <script>
+        function myFind(array, searchValue, callback) {
+            for (let i = 0; i < array.length; i++) {
+                if (callback(array[i], searchValue)) {
+                    return array[i];
+                }
+            }
+            return null;
+        }
+
+
+        function isEqual(element, searchValue) {
+            return element === searchValue;
+        }
+
+        window.onload = function() {
+            const numbers = [1, 2, 3, 4, 5, 6];
+
+            const result1 = myFind(numbers, 2, isEqual);
+            const messageElement1 = document.createElement('p');
+            messageElement1.innerText = `Kết quả tìm kiếm (2): ${result1}`;
+            document.body.appendChild(messageElement1);
+            console.log(`Kết quả tìm kiếm (2): ${result1}`);
+
+            const result2 = myFind(numbers, 10, isEqual);
+            const messageElement2 = document.createElement('p');
+            messageElement2.innerText = `Kết quả tìm kiếm (10): ${result2}`;
+            document.body.appendChild(messageElement2);
+            console.log(`Kết quả tìm kiếm (10): ${result2}`);
+        }
+    </script>
+</head>
+<body>
+    <h1>Custom myFind Function Example</h1>
+</body>
+</html>

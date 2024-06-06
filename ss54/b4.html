@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sum with Async Await</title>
+    <script>
+        async function sumWithAsyncAwait(array) {
+            let sum = 0;
+            for (let i = 0; i < array.length; i++) {
+                sum += array[i];
+            }
+            return sum;
+        }
+
+        async function calculateSumAndDisplay() {
+            const inputArray = document.getElementById("inputArray").value.split(",").map(Number);
+            const result = await sumWithAsyncAwait(inputArray);
+            document.getElementById("result").innerText = result;
+        }
+    </script>
+</head>
+<body>
+    <h1>Sum with Async Await</h1>
+    <label for="inputArray">Enter numbers separated by commas:</label>
+    <input type="text" id="inputArray">
+    <button onclick="calculateSumAndDisplay()">Calculate Sum</button>
+    <div>
+        <p>Result: <span id="result"></span></p>
+    </div>
+</body>
+</html>

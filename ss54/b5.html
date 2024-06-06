@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Prime Number</title>
+    <script>
+        function isPrimeWithPromise(number) {
+            return new Promise((resolve, reject) => {
+                if (number <= 1) {
+                    resolve(false);
+                } else {
+                    for (let i = 2; i <= Math.sqrt(number); i++) {
+                        if (number % i === 0) {
+                            resolve(false);
+                        }
+                    }
+                    resolve(true);
+                }
+            });
+        }
+
+        async function checkPrimeAndDisplay() {
+            const inputNumber = parseInt(document.getElementById("inputNumber").value);
+            const isPrime = await isPrimeWithPromise(inputNumber);
+            document.getElementById("result").innerText = isPrime ? "true" : "false";
+        }
+    </script>
+</head>
+<body>
+    <h1>Check Prime Number</h1>
+    <label for="inputNumber">Enter a number:</label>
+    <input type="text" id="inputNumber">
+    <button onclick="checkPrimeAndDisplay()">Check Prime</button>
+    <div>
+        <p>Result: <span id="result"></span></p>
+    </div>
+</body>
+</html>

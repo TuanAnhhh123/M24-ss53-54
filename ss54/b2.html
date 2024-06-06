@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phép chia số</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 20px;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Phép chia số</h1>
+        <label for="number1">Số thứ nhất:</label>
+        <input type="text" id="number1" required>
+        <label for="number2">Số thứ hai:</label>
+        <input type="text" id="number2" required>
+        <button onclick="divideNumbers()">Chia</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+  
+        function divideNumbers() {
+            const num1 = document.getElementById('number1').value;
+            const num2 = document.getElementById('number2').value;
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '';
+
+            try {
+                const number1 = parseFloat(num1);
+                const number2 = parseFloat(num2);
+
+                if (isNaN(number1) || isNaN(number2)) {
+                    throw new Error('Phải nhập vào hai số');
+                }
+                if (number2 === 0) {
+                    throw new Error('Không thể chia cho 0');
+                }
+
+                const result = number1 / number2;
+                resultDiv.innerHTML = `Kết quả phép chia là: ${result}`;
+            } catch (error) {
+                resultDiv.innerHTML = `<span class="error">Lỗi: ${error.message}</span>`;
+            } finally {
+                resultDiv.innerHTML += `<br>Kết thúc hàm divideNumbers`;
+            }
+        }
+
+        
+        function testDivideNumbers() {
+            const tests = [
+                { num1: 10, num2: 2, expected: '5' },
+                { num1: 10, num2: 0, expected: 'Lỗi: Không thể chia cho 0\nKết thúc hàm divideNumbers' },
+                { num1: 'abc', num2: 2, expected: 'Lỗi: Phải nhập vào hai số\nKết thúc hàm divideNumbers' }
+            ];
+
+            tests.forEach(test => {
+                const result = (function() {
+                    try {
+                        const number1 = parseFloat(test.num1);
+                        const number2 = parseFloat(test.num2);
+
+                        if (isNaN(number1) || isNaN(number2)) {
+                            throw new Error('Phải nhập vào hai số');
+                        }
+                        if (number2 === 0) {
+                            throw new Error('Không thể chia cho 0');
+                        }
+
+                        return number1 / number2;
+                    } catch (error) {
+                        return `Lỗi: ${error.message}`;
+                    } finally {
+                        console.log(`Kết thúc hàm divideNumbers`);
+                    }
+                })();
+
+                console.log(`divideNumbers(${test.num1}, ${test.num2}) = ${result}; Expected = ${test.expected}`);
+            });
+        }
+
+    
+        testDivideNumbers();
+    </script>
+</body>
+</html>

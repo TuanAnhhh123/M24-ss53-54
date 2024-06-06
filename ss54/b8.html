@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+</head>
+<body>
+    <h1>Countdown Timer</h1>
+    <button onclick="startCountDown(5)">Start Countdown</button>
+    <div id="countdown"></div>
+
+    <script>
+        function countDown(n) {
+            return new Promise((resolve, reject) => {
+                let seconds = n;
+                const intervalId = setInterval(() => {
+                    const countdownDiv = document.getElementById("countdown");
+                    if (seconds > 0) {
+                        countdownDiv.innerText = seconds;
+                        seconds--;
+                    } else {
+                        clearInterval(intervalId);
+                        countdownDiv.innerText = "Hoàn thành quá trình đếm";
+                        resolve();
+                    }
+                }, 1000);
+            });
+        }
+
+        async function startCountDown(seconds) {
+            try {
+                await countDown(seconds);
+                console.log("Đã hoàn thành đếm ngược.");
+            } catch (error) {
+                console.error("Đã xảy ra lỗi:", error);
+            }
+        }
+    </script>
+</body>
+</html>

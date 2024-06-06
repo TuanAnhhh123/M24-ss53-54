@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sequential Task Execution with Callbacks</title>
+    <script>
+
+        function task1(callback) {
+            setTimeout(() => {
+                console.log("Task 1 được thực thi");
+                const messageElement = document.createElement('p');
+                messageElement.innerText = "Task 1 được thực thi";
+                document.body.appendChild(messageElement);
+                callback();
+            }, 1000);
+        }
+
+
+        function task2(callback) {
+            setTimeout(() => {
+                console.log("Task 2 được thực thi");
+                const messageElement = document.createElement('p');
+                messageElement.innerText = "Task 2 được thực thi";
+                document.body.appendChild(messageElement);
+                callback();
+            }, 1500);
+        }
+
+
+        function task3() {
+            setTimeout(() => {
+                console.log("Task 3 được thực thi! Hoàn thành");
+                const messageElement = document.createElement('p');
+                messageElement.innerText = "Task 3 được thực thi! Hoàn thành";
+                document.body.appendChild(messageElement);
+            }, 2000);
+        }
+
+
+        window.onload = function() {
+            task1(() => {
+                task2(() => {
+                    task3();
+                });
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Sequential Task Execution Example</h1>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sort Array</title>
+</head>
+<body>
+    <h1>Sort Array</h1>
+    <button onclick="sortAndDisplayArray([1, 7, 2, 5, 9, 5])">Sort Array</button>
+    <div id="sortedArray"></div>
+
+    <script>
+        function sortArrayWithPromise(array) {
+            return new Promise((resolve, reject) => {
+                const sortedArray = array.slice().sort((a, b) => a - b);
+                resolve(sortedArray);
+            });
+        }
+
+        async function sortAndDisplayArray(array) {
+            try {
+                const sortedArray = await sortArrayWithPromise(array);
+                document.getElementById("sortedArray").innerText = "Sorted Array: " + sortedArray.join(", ");
+            } catch (error) {
+                console.error("Đã xảy ra lỗi:", error);
+            }
+        }
+    </script>
+</body>
+</html>
